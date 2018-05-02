@@ -39,6 +39,7 @@ class myUnet(object):
     def get_unet(self):
 
 		inputs = Input((self.img_rows, self.img_cols,176,1))
+        #expected output shape = (None, 256, 256, 880)
 		
 		'''
 		unet with crop(because padding = valid) 
@@ -133,22 +134,22 @@ class myUnet(object):
 		drop5 = Dropout(0.5)(conv5)
 
 		up6 = Conv3D(256, 2, activation = 'relu', padding = 'same', kernel_initializer = 'he_normal')(UpSampling3D(size = (2,2,2))(drop5))
-		merge6 = merge([drop4,up6], mode = 'concat', concat_axis = 3)
+		merge6 = merge([drop4,up6], mode = 'concat', concat_axis = 4)
 		conv6 = Conv3D(256, 3, activation = 'relu', padding = 'same', kernel_initializer = 'he_normal')(merge6)
 		conv6 = Conv3D(256, 3, activation = 'relu', padding = 'same', kernel_initializer = 'he_normal')(conv6)
 
 		up7 = Conv3D(128, 2, activation = 'relu', padding = 'same', kernel_initializer = 'he_normal')(UpSampling3D(size = (2,2,2))(conv6))
-		merge7 = merge([conv3,up7], mode = 'concat', concat_axis = 3)
+		merge7 = merge([conv3,up7], mode = 'concat', concat_axis = 4)
 		conv7 = Conv3D(128, 3, activation = 'relu', padding = 'same', kernel_initializer = 'he_normal')(merge7)
 		conv7 = Conv3D(128, 3, activation = 'relu', padding = 'same', kernel_initializer = 'he_normal')(conv7)
 
 		up8 = Conv3D(64, 2, activation = 'relu', padding = 'same', kernel_initializer = 'he_normal')(UpSampling3D(size = (2,2,2))(conv7))
-		merge8 = merge([conv2,up8], mode = 'concat', concat_axis = 3)
+		merge8 = merge([conv2,up8], mode = 'concat', concat_axis = 4)
 		conv8 = Conv3D(64, 3, activation = 'relu', padding = 'same', kernel_initializer = 'he_normal')(merge8)
 		conv8 = Conv3D(64, 3, activation = 'relu', padding = 'same', kernel_initializer = 'he_normal')(conv8)
 
 		up9 = Conv3D(32, 2, activation = 'relu', padding = 'same', kernel_initializer = 'he_normal')(UpSampling3D(size = (2,2,2))(conv8))
-		merge9 = merge([conv1,up9], mode = 'concat', concat_axis = 3)
+		merge9 = merge([conv1,up9], mode = 'concat', concat_axis = 4)
 		conv9 = Conv3D(32, 3, activation = 'relu', padding = 'same', kernel_initializer = 'he_normal')(merge9)
 		conv9 = Conv3D(32, 3, activation = 'relu', padding = 'same', kernel_initializer = 'he_normal')(conv9)
 		conv9 = Conv3D(2, 3, activation = 'relu', padding = 'same', kernel_initializer = 'he_normal')(conv9)
@@ -164,7 +165,7 @@ class myUnet(object):
     def train(self):
 
             #print("loading data")
-            imgs_train, imgs_mask_train, imgs_test = self.load_data()
+            #imgs_train, imgs_mask_train, imgs_test = self.load_data()
             #imgs_train = np.load("npydata/train.npy")
             #imgs_mask_train = np.load('npydata/train_labels.npy')
             #imgs_test = np.load("npydata/test.npy")
@@ -179,9 +180,9 @@ class myUnet(object):
             #imgs_mask_train = np.reshape(label[0:15,:,:],(15,256,256,1))
             #imgs_test = np.reshape(train[15:18,:,:],(3,256,256,1))
             
-            imgs_train = np.reshape(np.transpose(train)[0:15,:,:,:],[15,256,256,176,1])
-            imgs_test = np.reshape(np.transpose(train)[15:18,:,:,:],[3,256,256,176,1])
-            imgs_mask_train = np.reshape(np.transpose(label)[0:15,:,:,:],[15,256,256,176,1])
+            #imgs_train = np.reshape(np.transpose(train)[0:15,:,:,:],[15,256,256,176,1])
+            #imgs_test = np.reshape(np.transpose(train)[15:18,:,:,:],[3,256,256,176,1])
+            #imgs_mask_train = np.reshape(np.transpose(label)[0:15,:,:,:],[15,256,256,176,1])
             
             print("loading data done")
             model = self.get_unet()
@@ -189,7 +190,7 @@ class myUnet(object):
             
             model_checkpoint = ModelCheckpoint('unet.hdf5', monitor='loss',verbose=1, save_best_only=True)
             print('Fitting model...')
-            model.fit(imgs_train, imgs_mask_train, batch_size=1, nb_epoch=10, verbose=1,validation_split=0.2, shuffle=True, callbacks=[model_checkpoint])
+            model.fit(imgs_train, imgs_mask_train, batch_size=4, nb_epoch=1, verbose=1,validation_split=0.2, shuffle=True, callbacks=[model_checkpoint])
             
             print('predict test data')
             imgs_mask_test = model.predict(imgs_test, batch_size=1, verbose=1)
