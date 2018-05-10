@@ -107,11 +107,13 @@ class myUnet(object):
 
 
     def train(self):
-        train_flair = np.load('../data/train_flair.npy')
-        train_ot = np.load('../data/train_ot.npy')
+        train_flair = np.load('../data/dataset.npy')
+        train_ot = np.load('../data/label.npy')
         
         train = train_flair
         label = train_ot
+        
+        n_input = train
             
         imgs_train = np.reshape(np.transpose(train)[0:15,:,:,:],[15,256,256,176,1])
         imgs_test = np.reshape(np.transpose(train)[15:18,:,:,:],[3,256,256,176,1])
@@ -123,7 +125,7 @@ class myUnet(object):
             
         model_checkpoint = ModelCheckpoint('unet.hdf5', monitor='loss',verbose=1, save_best_only=True)
         print('Fitting model...')
-        model.fit(imgs_train, imgs_mask_train, batch_size=1, nb_epoch=1, verbose=1,validation_split=0.5, shuffle=True, callbacks=[model_checkpoint])
+        model.fit(imgs_train, imgs_mask_train, batch_size=1, nb_epoch=1, verbose=1,validation_split=0.2, shuffle=True, callbacks=[model_checkpoint])
             
         print('predict test data')
         imgs_mask_test = model.predict(imgs_test, batch_size=1, verbose=1)
