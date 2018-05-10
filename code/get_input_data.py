@@ -7,9 +7,9 @@ from medpy.filter import otsu
 from medpy.io import save
 
 
-PATH = "/Users/muthuvel/Desktop/Independent Study - M Gao/Dataset/BRATS-train/Image_Data"
+PATH = "/Users/muthuvel/Desktop/Independent Study - M Gao/Dataset/fulldata/Image_Data"
 
-PATH_Synthetic = "/Users/muthuvel/Desktop/Independent Study - M Gao/Dataset/BRATS-train/Synthetic_Data"
+PATH_Synthetic = "/Users/muthuvel/Desktop/Independent Study - M Gao/Dataset/fulldata/Synthetic_Data"
 
 PATH_test = "/Users/muthuvel/Desktop/Independent Study - M Gao/Dataset/BRATS-test/Image_Data"
 
@@ -85,6 +85,7 @@ def load_dataset(path):
                     HG_samples = create_4_chan_data(HG_t2, HG_t1c, HG_t1, HG_flair, HG_ot)
                     print(HG_samples[0].shape)
                     if (HG_samples[0].shape != (176, 256, 256)):
+                        print("skipped")
                         continue
                     
                     a = np.reshape(HG_samples[0],[176,256,256,1])
@@ -135,20 +136,21 @@ def load_dataset(path):
                     #a = np.reshape(HG_samples[0],[176,256,256,1])
                     print(LG_samples[0].shape)
                     if (LG_samples[0].shape != (176, 256, 256)):
+                        print("skipped")
                         continue
-                    a = np.reshape(HG_samples[0],[176,256,256,1])
+                    a = np.reshape(LG_samples[0],[176,256,256,1])
                     train_ot = np.concatenate((train_ot,a),axis = 3)
                     
-                    a = np.reshape(HG_samples[1],[176,256,256,1])
+                    a = np.reshape(LG_samples[1],[176,256,256,1])
                     train_flair = np.concatenate((train_flair,a),axis = 3)
                     
-                    a = np.reshape(HG_samples[2],[176,256,256,1])
+                    a = np.reshape(LG_samples[2],[176,256,256,1])
                     train_t1 = np.concatenate((train_t1,a),axis = 3)
                     
-                    a = np.reshape(HG_samples[3],[176,256,256,1])
+                    a = np.reshape(LG_samples[3],[176,256,256,1])
                     train_t1c = np.concatenate((train_t1c,a),axis = 3)
                     
-                    a = np.reshape(HG_samples[4],[176,256,256,1])
+                    a = np.reshape(LG_samples[4],[176,256,256,1])
                     train_t2 = np.concatenate((train_t2,a),axis = 3)
                     
                     #train_ot = np.concatenate((train_ot,a),axis = 3)
@@ -172,20 +174,20 @@ def load_dataset(path):
 
 [train_t2_s, train_t1c_s,train_t1_s,train_flair_s,train_ot_s] = load_dataset(PATH_Synthetic)
 
-[test_t2, test_t1c,test_t1,test_flair,test_ot] = load_dataset(PATH_test)
+#[test_t2, test_t1c,test_t1,test_flair,test_ot] = load_dataset(PATH_test)
 
-[test_t2_s, test_t1c_s,test_t1_s,test_flair_s,test_ot_s] = load_dataset(PATH_test_Synthetic)
+#[test_t2_s, test_t1c_s,test_t1_s,test_flair_s,test_ot_s] = load_dataset(PATH_test_Synthetic)
 
-np.save('../data/train_flair',train_flair)
-np.save('../data/train_ot',train_ot)
-np.save('../data/train_t1',train_t1)
-np.save('../data/train_t1c',train_t1c)
-np.save('../data/train_t2',train_t2)
+#np.save('../data/train_flair',train_flair)
+#np.save('../data/train_ot',train_ot)
+#np.save('../data/train_t1',train_t1)
+#np.save('../data/train_t1c',train_t1c)
+#np.save('../data/train_t2',train_t2)
 
-np.save('../data/test_flair',test_flair)
-np.save('../data/test_ot',test_ot)
-np.save('../data/test_t1',test_t1)
-np.save('../data/test_t1c',test_t1c)
-np.save('../data/test_t2',test_t2)
+#np.save('../data/test_flair',test_flair)
+#np.save('../data/test_ot',test_ot)
+#np.save('../data/test_t1',test_t1)
+#np.save('../data/test_t1c',test_t1c)
+#np.save('../data/test_t2',test_t2)
 
-[train_t2, train_t1c,train_t1,train_flair,train_ot] = load_dataset(PATH)
+#[train_t2, train_t1c,train_t1,train_flair,train_ot] = load_dataset(PATH)

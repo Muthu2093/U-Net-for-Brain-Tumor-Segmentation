@@ -1,0 +1,1251 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd">
+<html><head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="qrichtext" content="1" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Menlo'; font-size:12pt; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" color:#000080;">In [</span><span style=" font-weight:600; color:#000080;">177</span><span style=" color:#000080;">]:</span> sum(sum(sum(error)))</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" color:#8b0000;">Out[</span><span style=" font-weight:600; color:#8b0000;">177</span><span style=" color:#8b0000;">]:</span> array([2401819.48474277])</p>
+<p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><br /></p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" color:#000080;">In [</span><span style=" font-weight:600; color:#000080;">178</span><span style=" color:#000080;">]:</span> 2401819/(704*256*256)</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" color:#8b0000;">Out[</span><span style=" font-weight:600; color:#8b0000;">178</span><span style=" color:#8b0000;">]:</span> 0.05205802483992143</p>
+<p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><br /></p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" color:#000080;">In [</span><span style=" font-weight:600; color:#000080;">179</span><span style=" color:#000080;">]:</span> ls</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" color:#00008b;">__pycache__</span>/           imgs_test.mat          train.npy</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">cGAN.py                prepare_input_data.py  unet.hdf5</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">data.py                test.py                unet2D.py</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">imgs_mask_test.npy     test1.mha              unet3d.py</p>
+<p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><br /></p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" color:#000080;">In [</span><span style=" font-weight:600; color:#000080;">180</span><span style=" color:#000080;">]:</span> cd ..</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">/Users/muthuvel/Documents/GitHub/Generative-Adversarial-Networks-for-Brain-Tumor-Segmentation</p>
+<p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><br /></p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" color:#000080;">In [</span><span style=" font-weight:600; color:#000080;">181</span><span style=" color:#000080;">]:</span> ls</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" color:#00008b;">CUDA_results</span>/         README.md             <span style=" color:#00008b;">data</span>/</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">LICENSE               <span style=" color:#00008b;">Testing UNET</span>/         <span style=" color:#00008b;">images</span>/</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" color:#00008b;">MATLAB test</span>/          <span style=" color:#00008b;">code</span>/                 loadingDataset.py</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Project_Proposal.pdf  <span style=" color:#00008b;">code-python3</span>/         <span style=" color:#00008b;">results</span>/</p>
+<p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><br /></p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" color:#000080;">In [</span><span style=" font-weight:600; color:#000080;">182</span><span style=" color:#000080;">]:</span> cd results/</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">/Users/muthuvel/Documents/GitHub/Generative-Adversarial-Networks-for-Brain-Tumor-Segmentation/results</p>
+<p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><br /></p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" color:#000080;">In [</span><span style=" font-weight:600; color:#000080;">183</span><span style=" color:#000080;">]:</span> cd brats08epch/outputs</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">[Errno 2] No such file or directory: 'brats08epch/outputs'</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">/Users/muthuvel/Documents/GitHub/Generative-Adversarial-Networks-for-Brain-Tumor-Segmentation/results</p>
+<p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><br /></p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" color:#000080;">In [</span><span style=" font-weight:600; color:#000080;">184</span><span style=" color:#000080;">]:</span> ls</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">0.jpg                              418.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">1.jpg                              419.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">10.jpg                             42.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">100.jpg                            420.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">101.jpg                            421.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">102.jpg                            422.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">103.jpg                            423.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">104.jpg                            424.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">105.jpg                            425.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">106.jpg                            426.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">107.jpg                            427.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">108.jpg                            428.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">109.jpg                            429.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">11.jpg                             43.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">110.jpg                            430.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">111.jpg                            431.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">112.jpg                            432.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">113.jpg                            433.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">114.jpg                            434.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">115.jpg                            435.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">116.jpg                            436.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">117.jpg                            437.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">118.jpg                            438.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">119.jpg                            439.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">12.jpg                             44.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">120.jpg                            440.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">121.jpg                            441.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">122.jpg                            442.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">123.jpg                            443.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">124.jpg                            444.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">125.jpg                            445.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">126.jpg                            446.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">127.jpg                            447.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">128.jpg                            448.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">129.jpg                            449.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">13.jpg                             45.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">130.jpg                            450.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">131.jpg                            451.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">132.jpg                            452.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">133.jpg                            453.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">134.jpg                            454.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">135.jpg                            455.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">136.jpg                            456.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">137.jpg                            457.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">138.jpg                            458.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">139.jpg                            459.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">14.jpg                             46.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">140.jpg                            460.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">141.jpg                            461.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">142.jpg                            462.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">143.jpg                            463.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">144.jpg                            464.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">145.jpg                            465.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">146.jpg                            466.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">147.jpg                            467.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">148.jpg                            468.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">149.jpg                            469.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">15.jpg                             47.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">150.jpg                            470.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">151.jpg                            471.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">152.jpg                            472.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">153.jpg                            473.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">154.jpg                            474.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">155.jpg                            475.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">156.jpg                            476.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">157.jpg                            477.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">158.jpg                            478.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">159.jpg                            479.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">16.jpg                             48.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">160.jpg                            480.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">161.jpg                            481.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">162.jpg                            482.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">163.jpg                            483.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">164.jpg                            484.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">165.jpg                            485.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">166.jpg                            486.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">167.jpg                            487.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">168.jpg                            488.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">169.jpg                            489.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">17.jpg                             49.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">170.jpg                            490.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">171.jpg                            491.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">172.jpg                            492.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">173.jpg                            493.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">174.jpg                            494.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">175.jpg                            495.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">176.jpg                            496.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">177.jpg                            497.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">178.jpg                            498.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">179.jpg                            499.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">18.jpg                             5.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">180.jpg                            50.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">181.jpg                            500.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">182.jpg                            501.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">183.jpg                            502.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">184.jpg                            503.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">185.jpg                            504.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">186.jpg                            505.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">187.jpg                            506.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">188.jpg                            507.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">189.jpg                            508.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">19.jpg                             509.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">190.jpg                            51.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">191.jpg                            510.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">192.jpg                            511.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">193.jpg                            512.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">194.jpg                            513.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">195.jpg                            514.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">196.jpg                            515.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">197.jpg                            516.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">198.jpg                            517.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">199.jpg                            518.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">2.jpg                              519.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">20.jpg                             52.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">200.jpg                            520.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">201.jpg                            521.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">202.jpg                            522.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">203.jpg                            523.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">204.jpg                            524.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">205.jpg                            525.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">206.jpg                            526.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">207.jpg                            527.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">208.jpg                            528.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">209.jpg                            529.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">21.jpg                             53.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">210.jpg                            530.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">211.jpg                            531.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">212.jpg                            532.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">213.jpg                            533.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">214.jpg                            534.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">215.jpg                            535.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">216.jpg                            536.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">217.jpg                            537.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">218.jpg                            538.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">219.jpg                            539.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">22.jpg                             54.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">220.jpg                            540.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">221.jpg                            541.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">222.jpg                            542.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">223.jpg                            543.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">224.jpg                            544.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">225.jpg                            545.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">226.jpg                            546.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">227.jpg                            547.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">228.jpg                            548.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">229.jpg                            549.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">23.jpg                             55.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">230.jpg                            550.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">231.jpg                            551.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">232.jpg                            552.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">233.jpg                            553.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">234.jpg                            554.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">235.jpg                            555.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">236.jpg                            556.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">237.jpg                            557.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">238.jpg                            558.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">239.jpg                            559.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">24.jpg                             56.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">240.jpg                            560.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">241.jpg                            561.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">242.jpg                            562.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">243.jpg                            563.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">244.jpg                            564.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">245.jpg                            565.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">246.jpg                            566.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">247.jpg                            567.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">248.jpg                            568.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">249.jpg                            569.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">25.jpg                             57.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">250.jpg                            570.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">251.jpg                            571.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">252.jpg                            572.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">253.jpg                            573.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">254.jpg                            574.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">255.jpg                            575.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">256.jpg                            576.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">257.jpg                            577.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">258.jpg                            578.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">259.jpg                            579.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">26.jpg                             58.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">260.jpg                            580.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">261.jpg                            581.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">262.jpg                            582.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">263.jpg                            583.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">264.jpg                            584.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">265.jpg                            585.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">266.jpg                            586.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">267.jpg                            587.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">268.jpg                            588.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">269.jpg                            589.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">27.jpg                             59.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">270.jpg                            590.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">271.jpg                            591.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">272.jpg                            592.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">273.jpg                            593.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">274.jpg                            594.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">275.jpg                            595.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">276.jpg                            596.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">277.jpg                            597.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">278.jpg                            598.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">279.jpg                            599.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">28.jpg                             6.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">280.jpg                            60.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">281.jpg                            600.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">282.jpg                            601.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">283.jpg                            602.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">284.jpg                            603.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">285.jpg                            604.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">286.jpg                            605.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">287.jpg                            606.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">288.jpg                            607.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">289.jpg                            608.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">29.jpg                             609.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">290.jpg                            61.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">291.jpg                            610.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">292.jpg                            611.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">293.jpg                            612.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">294.jpg                            613.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">295.jpg                            614.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">296.jpg                            615.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">297.jpg                            616.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">298.jpg                            617.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">299.jpg                            618.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">3.jpg                              619.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">30.jpg                             62.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">300.jpg                            620.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">301.jpg                            621.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">302.jpg                            622.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">303.jpg                            623.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">304.jpg                            624.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">305.jpg                            625.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">306.jpg                            626.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">307.jpg                            627.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">308.jpg                            628.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">309.jpg                            629.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">31.jpg                             63.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">310.jpg                            630.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">311.jpg                            631.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">312.jpg                            632.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">313.jpg                            633.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">314.jpg                            634.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">315.jpg                            635.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">316.jpg                            636.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">317.jpg                            637.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">318.jpg                            638.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">319.jpg                            639.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">32.jpg                             64.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">320.jpg                            640.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">321.jpg                            641.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">322.jpg                            642.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">323.jpg                            643.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">324.jpg                            644.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">325.jpg                            645.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">326.jpg                            646.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">327.jpg                            647.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">328.jpg                            648.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">329.jpg                            649.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">33.jpg                             65.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">330.jpg                            650.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">331.jpg                            651.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">332.jpg                            652.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">333.jpg                            653.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">334.jpg                            654.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">335.jpg                            655.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">336.jpg                            656.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">337.jpg                            657.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">338.jpg                            658.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">339.jpg                            659.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">34.jpg                             66.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">340.jpg                            660.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">341.jpg                            661.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">342.jpg                            662.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">343.jpg                            663.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">344.jpg                            664.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">345.jpg                            665.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">346.jpg                            666.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">347.jpg                            667.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">348.jpg                            668.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">349.jpg                            669.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">35.jpg                             67.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">350.jpg                            670.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">351.jpg                            671.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">352.jpg                            672.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">353.jpg                            673.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">354.jpg                            674.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">355.jpg                            675.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">356.jpg                            676.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">357.jpg                            677.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">358.jpg                            678.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">359.jpg                            679.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">36.jpg                             68.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">360.jpg                            680.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">361.jpg                            681.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">362.jpg                            682.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">363.jpg                            683.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">364.jpg                            684.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">365.jpg                            685.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">366.jpg                            686.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">367.jpg                            687.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">368.jpg                            688.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">369.jpg                            689.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">37.jpg                             69.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">370.jpg                            690.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">371.jpg                            691.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">372.jpg                            692.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">373.jpg                            693.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">374.jpg                            694.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">375.jpg                            695.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">376.jpg                            696.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">377.jpg                            697.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">378.jpg                            698.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">379.jpg                            699.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">38.jpg                             7.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">380.jpg                            70.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">381.jpg                            700.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">382.jpg                            701.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">383.jpg                            702.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">384.jpg                            703.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">385.jpg                            71.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">386.jpg                            72.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">387.jpg                            73.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">388.jpg                            74.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">389.jpg                            75.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">39.jpg                             76.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">390.jpg                            77.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">391.jpg                            78.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">392.jpg                            79.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">393.jpg                            8.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">394.jpg                            80.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">395.jpg                            81.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">396.jpg                            82.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">397.jpg                            83.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">398.jpg                            84.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">399.jpg                            85.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">4.jpg                              86.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">40.jpg                             87.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">400.jpg                            88.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">401.jpg                            89.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">402.jpg                            9.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">403.jpg                            90.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">404.jpg                            91.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">405.jpg                            92.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">406.jpg                            93.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">407.jpg                            94.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">408.jpg                            95.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">409.jpg                            96.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">41.jpg                             97.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">410.jpg                            98.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">411.jpg                            99.jpg</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">412.jpg                            <span style=" color:#00008b;">anon</span>/</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">413.jpg                            <span style=" color:#00008b;">brats01epoch</span>/</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">414.jpg                            <span style=" color:#00008b;">brats08+1 epoch</span>/</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">415.jpg                            <span style=" color:#00008b;">brats08epch</span>/</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">416.jpg                            <span style=" color:#00008b;">bratscombined 4 channels epoch 01</span>/</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">417.jpg</p>
+<p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><br /></p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" color:#000080;">In [</span><span style=" font-weight:600; color:#000080;">185</span><span style=" color:#000080;">]:</span> cd brats08epch/</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">/Users/muthuvel/Documents/GitHub/Generative-Adversarial-Networks-for-Brain-Tumor-Segmentation/results/brats08epch</p>
+<p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><br /></p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" color:#000080;">In [</span><span style=" font-weight:600; color:#000080;">186</span><span style=" color:#000080;">]:</span> cd outputs</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">[Errno 2] No such file or directory: 'outputs'</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">/Users/muthuvel/Documents/GitHub/Generative-Adversarial-Networks-for-Brain-Tumor-Segmentation/results/brats08epch</p>
+<p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><br /></p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" color:#000080;">In [</span><span style=" font-weight:600; color:#000080;">187</span><span style=" color:#000080;">]:</span> imgs = np.load(imgs_mask_test.npy&quot;)</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" color:#4682b4;">  File </span><span style=" color:#006400;">&quot;&lt;ipython-input-187-69ab4e57337e&gt;&quot;</span><span style=" color:#4682b4;">, line </span><span style=" color:#006400;">1</span></p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" color:#8b0000;">    imgs = np.load(imgs_mask_test.npy&quot;)</span></p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">                                       ^</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" color:#8b0000;">SyntaxError:</span> EOL while scanning string literal</p>
+<p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><br /></p>
+<p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><br /></p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" color:#000080;">In [</span><span style=" font-weight:600; color:#000080;">188</span><span style=" color:#000080;">]:</span> </p>
+<p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><br /></p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" color:#000080;">In [</span><span style=" font-weight:600; color:#000080;">188</span><span style=" color:#000080;">]:</span> imgs = np.load(&quot;imgs_mask_test.npy&quot;)</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Traceback <span style=" color:#4682b4;">(most recent call last)</span>:</p>
+<p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><br /></p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">  File <span style=" color:#00ff00;">&quot;&lt;ipython-input-188-21576f3bf7d0&gt;&quot;</span>, line <span style=" color:#00ff00;">1</span>, in <span style=" color:#ff00ff;">&lt;module&gt;</span></p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">    imgs = np.load(&quot;imgs_mask_test.npy&quot;)</p>
+<p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><br /></p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" color:#4682b4;">  File </span><span style=" color:#006400;">&quot;/anaconda3/envs/ComputerVsion/lib/python3.6/site-packages/numpy/lib/npyio.py&quot;</span><span style=" color:#4682b4;">, line </span><span style=" color:#006400;">372</span><span style=" color:#4682b4;">, in </span><span style=" color:#9400d3;">load</span></p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" color:#8b0000;">    fid = open(file, &quot;rb&quot;)</span></p>
+<p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><br /></p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" color:#8b0000;">FileNotFoundError:</span> [Errno 2] No such file or directory: 'imgs_mask_test.npy'</p>
+<p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><br /></p>
+<p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><br /></p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" color:#000080;">In [</span><span style=" font-weight:600; color:#000080;">189</span><span style=" color:#000080;">]:</span> </p>
+<p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><br /></p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" color:#000080;">In [</span><span style=" font-weight:600; color:#000080;">189</span><span style=" color:#000080;">]:</span> ls</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" color:#00008b;">actual_label</span>/           <span style=" color:#00008b;">output after threshold</span>/</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" color:#00008b;">output</span>/                 unet.hdf5</p>
+<p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><br /></p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" color:#000080;">In [</span><span style=" font-weight:600; color:#000080;">190</span><span style=" color:#000080;">]:</span> cd output</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">/Users/muthuvel/Documents/GitHub/Generative-Adversarial-Networks-for-Brain-Tumor-Segmentation/results/brats08epch/output</p>
+<p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><br /></p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" color:#000080;">In [</span><span style=" font-weight:600; color:#000080;">191</span><span style=" color:#000080;">]:</span> imgs = np.load(&quot;imgs_mask_test.npy&quot;)</p>
+<p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><br /></p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" color:#000080;">In [</span><span style=" font-weight:600; color:#000080;">192</span><span style=" color:#000080;">]:</span> plt.imwhoe(imgs[305,:,:,0])</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Traceback <span style=" color:#4682b4;">(most recent call last)</span>:</p>
+<p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><br /></p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" color:#4682b4;">  File </span><span style=" color:#006400;">&quot;&lt;ipython-input-192-5a3a9f421b7b&gt;&quot;</span><span style=" color:#4682b4;">, line </span><span style=" color:#006400;">1</span><span style=" color:#4682b4;">, in </span><span style=" color:#9400d3;">&lt;module&gt;</span></p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" color:#8b0000;">    plt.imwhoe(imgs[305,:,:,0])</span></p>
+<p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><br /></p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" color:#8b0000;">AttributeError:</span> module 'matplotlib.pyplot' has no attribute 'imwhoe'</p>
+<p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><br /></p>
+<p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><br /></p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" color:#000080;">In [</span><span style=" font-weight:600; color:#000080;">193</span><span style=" color:#000080;">]:</span> </p>
+<p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><br /></p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" color:#000080;">In [</span><span style=" font-weight:600; color:#000080;">193</span><span style=" color:#000080;">]:</span> plt.imshow(imgs[305,:,:,0])</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" color:#8b0000;">Out[</span><span style=" font-weight:600; color:#8b0000;">193</span><span style=" color:#8b0000;">]:</span> &lt;matplotlib.image.AxesImage at 0x398c8e588&gt;</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><img src="data:image/png;base64,
+iVBORw0KGgoAAAANSUhEUgAAAQYAAAD8CAYAAACVSwr3AAAACXBIWXMAAAsS
+AAALEgHS3X78AAAAOXpUWHRTb2Z0d2FyZQAACJnLTSwpyMkvyclMUihLLSrO
+zM9TMNIDQh2FjJKSAit9/Vy4Ar38onR9AKceEPLGlRjzAAAgAElEQVR4nOy9
+W4xkV33/+1lr7b3r0reZsT0X9xjbZAjYJv77b0wMD0HiGCdRTmQEPnK4SBg5
+YiRLCInLQ16Q4CX4BQkkeMhIBJmXIEtHf3weuCQPQUf8dYg1B6yc2CHM39gw
+Mx7Pte9VtS9rrfOw1tq169IzPTPdHnt6fUat6a7eVbWrutZ3/+5LWGstkUgk
+0kDe6BOIRCJvPaIwRCKRCaIwRCKRCaIwRCKRCaIwRCKRCaIwRCKRCXZMGH76
+05/y7ne/myNHjvDMM8/s1NNEIpEdQOxEHYPWmj/+4z/mX/7lXzh8+DDvf//7
++ad/+ifuvffe7X6qSCSyA+yIxfDCCy9w5MgR3vnOd5JlGZ/4xCd4/vnnd+Kp
+IpHIDpDsxIOePn2aO+64o/758OHD/Nu//dumx2fpDB26WG0gFmJGItuDEIhE
+YdME3VF06HPhwoUt3XVHhGErHDt2jGPHjgGgtOBPxYcBC+JGnVEkchNSgVAt
+7JE/Zqn6v7Z8tx1xJRYXFzl58mT986lTp1hcXBw55ujRoxw/fpzjx4+TkkVL
+IRLZIWxRkJw8f1X32RFheP/738+JEyd49dVXKYqCH/7whzz22GOb3yFqQiSy
+c1iLvrR0VXfZEVciSRK+853v8Bd/8RdorXnqqae47777duKpIpHIVtD6qg7f
+kXTl1TIv9vGweORGn0YkcvMiBEv//XccP358S4fHysdIJDJBFIZIZDdwlY5B
+FIZIJDJBFIZIJDJBFIZIJDJBFIZIJDJBFIZIJDJBFIZIJDJBFIZIJDJBFIZI
+JDJBFIZIJDJBFIZIJDJBFIZIJDJBFIZIJDJBFIZIJDJBFIZIJDJBFIZIJDJB
+FIZIJDJBFIZIJDJBFIZIJDJBFIZIJDJBFIZIJDJBFIZIJDJBFIZIJDJBFIZI
+JDJBFIZIJDJBFIZIJDJBFIZIJDJBFIZIJDJBFIZIJDJBFIZIJDJBFIZIJDJB
+FIZIJDJBFIZIJDJBcj13vuuuu5ibm0MpRZIkHD9+nEuXLvE3f/M3vPbaa9x1
+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
+5jZKGAqbgHWpyJ7J6OlWPWGpr9M6uGisoDSKN1bn2PjDPO0LkrnfWzoXStK1
+ylk+xmBT5Ybf9kpsUSCkdDUIjcDiptenzW6fGAbbaISa1iG5i/seroUoDDtN
+/cH2gUjh4w4wnAPvrQrr2hlH8u+u8EYPy6wHA1jfoNMb0D7Zwsy1mf99StlN
+MC1BfkaR/24e1YJTe7r87taDiErw/7QM6VzOg3ecIpMVHVXSUSUKQyJNLQyp
+1KxXTgiksK7+QKeURtGrUlaKDquDNhcvzdJ9qU3nnOXWMxUH8sINULEWkWtX
+m9EbuBiA8uI2yJ0IVMVojYG5TBxhvCt0C0JRxw5C5mGzMunIpkRheLNoCoSR
+I7+qhcJ3Yo7cTQJaO7fCWnel1QY2eoiidJmLXgvVStGzGapvaF+S6LZgY7+i
+cy7BpLBxh6As27woFyl6Gd35AbfObrC/u0ZblSifFZFYH1T0+0oIi2/9AmB1
+0Gbl329h5pJg4TVNuqZJBhqZuwyD7JeN6UrDAi7wIieBUk+8TtEoBnNvkxm1
+ArawmEcCjDGWcF1EYXizabgXtaUQdqmSU66YXkQmBCIvXO6/LBH9AaqVITcy
+xG1zbl/MVCIrS9mR9PZL2uckxYIgV22SuZKNczNsLHX4g7qFztyAuY4rMru1
+u4GxgkS6YGJpXINU6YVi6Tf76CwL5k4ZslWNqCzJxb7LqBiLCAHFejH7+ZeV
+dqXKVTWZPQjxFCbnNobf1483bkFMK2KqB7TErMO1EoXhRhA+4HYzgWh8+K0Z
+sSQstr4KW6PcVdkvOJEXJMYNKLGdjGRZYDoJM28o8r0pOhMM9iTodkrVAdMC
+k1oqm7Gau6atFQk2sZRzFpkLqltLDty+zNkze1CXUmZOC2ZPa9oXK9KlgStZ
+rjMNDZcgbB9X6WEJs200mjUXtDGQZXUZtHuLbD1aTQgxGYNoWBf17/z9Y9HS
+9ROF4UYRPqyXEYjAhCURUp9V5WMQ0pUN+xJrlEKuJ5AoZLuFTRNk3sKmkmwl
+oepKTCIoZwTZmqFqSzoXSxBgUkHVlrSWNdmlAeV8xvkH9nPwdUPVAiutq01Y
+GWDaCXRTEmuHRUtS+kpGDWEbuSZSIAyT4tBcyMKXlYfsRVW54KtSI+ndEUsh
+CGeMJ2wLURhuNCMf3DEBmCIUdWbDBzJrCyIEKcP30rcj9wbIRCHXM2yWkqYJ
+VglsK8Wkkqqb0C0NqleNnIuo/ISptQGHel2SpR5r79lH+1JBcrEPuJYPUWon
+SoBNlEtHCoHtthFrG26QSl3ROGWRBnHwloTwzU/TRr7b4Eo1+ybcG1T/fvr7
+GrlaojC8lZj4ME/GHEJmw+E7EG2jwEc3RrD4reItOJHwvryQAqEUUgjS1E9u
+DKZ/OIfQ46EN6VoPlGTuF78DoxHttrMGdCMoqLV7jLA4l1ah23aNZL4701rr
+LBrhx+gHN8nff9xlsD4eQTgWMF6E6vtGl2FHiMLwVqbpbozcPmp2j7oeehij
+0Ay3bxt/LF9MZfNiOOwkPG4QifGNa8OVuSgbboxxLc/aN0M1jrWD3D+lDyxK
+CWk6vNqH4SghNhBKpJvpxsu+P7uzUOnNIArD24HxD74YC06O/G5cKAA0wlcq
+1kKhzahF0SRUYIZZfyMaCAAAClpJREFUEhNxAu2ex2/qYsNFvKpGswfeQmk+
+fr34m68pZFrG6g/cyxs7uygGbwpRGN6OjC+qkd9NKxLaxKoIFoU/ZvhrM1K2
+bQlpxNDsIUZSjCOlzL5qsy57bsYtlHSBx3DDZiPXNqtSjGLwphGF4e3O5ayJ
++pitWRUjh9jRx6ktjYAcWgKi6Z40MwUhc+BvN8VkwHDyVMd+H8XghhCF4WZj
+KwvJNkRgk41orJ526/Q5BxPPOB6bmHqnaA28lYnCsNvZrgV5ubjHTjxfZEeJ
+whDZHuKCv6nYgs0XiUR2G1EYIpHIBFEYIpHIBFEYIpHIBFEYIpHIBFEYIpHI
+BFEYIpHIBFEYIpHIBFEYIpHIBFEYIpHIBFEYIpHIBFEYIpHIBFEYIpHIBFEY
+IpHIBFEYIpHIBFEYIpHIBFEYIpHIBFEYIpHIBFcUhpMnT/LhD3+Ye++9l/vu
+u49vf/vbAFy6dIlHH32Ud73rXTz66KMsLS0Bbgz4F77wBY4cOcL999/Pr371
+q519BZFIZNu5ojAkScI3v/lNXn75ZX75y1/y3e9+l5dffplnnnmGRx55hBMn
+TvDII4/wzDPPAPCTn/yEEydOcOLECY4dO8bTTz+94y8iEolsL1cUhkOHDvHg
+gw8CMDc3xz333MPp06d5/vnnefLJJwF48skn+dGPfgTA888/z2c+8xmEEHzg
+Ax9geXmZM2fO7OBLiEQi281VxRhee+01fv3rX/Pwww9z9uxZDh06BMDBgwc5
+e/YsAKdPn+aOO+6o73P48GFOnz69jacciUR2mi2Pj19fX+fxxx/nW9/6FvPz
+8yO/E0JM7m94BY4dO8axY8cAKMmv6r6RSGRn2ZLFUJYljz/+OJ/+9Kf5+Mc/
+DsCBAwdqF+HMmTPs378fgMXFRU6ePFnf99SpUywuLk485tGjRzl+/DjHjx8n
+pXXdLyQSiWwfVxQGay1/+7d/yz333MOXvvSl+vbHHnuMZ599FoBnn32Wj370
+o/XtP/jBD7DW8stf/pKFhYXa5YhEIm8PhLWX30LoF7/4BX/2Z3/Gn/zJnyD9
+bsd///d/z8MPP8wTTzzBH/7wB+68806ee+459u3bh7WWz3/+8/z0pz+l2+3y
+/e9/n4ceeuiyJzEv9vGweGT7XlUkEplg6cFXOX78+JaOvaIwvBlEYYhEdp6r
+EYZY+RiJRCaIwhCJRCaIwhCJRCaIwhCJRCaIwhCJRCaIwhCJRCaIwhCJRCaI
+whCJRCaIwhCJRCaIwhCJRCaIwhCJRCaIwhCJRCaIwhCJRCaIwhCJRCaIwhCJ
+RCaIwhCJRCaIwhCJRCaIwhCJRCaIwhCJRCaIwhCJRCaIwhCJRCaIwhCJRCaI
+whCJRCaIwhCJRCaIwhCJRCaIwhCJRCaIwhCJRCaIwhCJRCaIwhCJRCaIwhCJ
+RCaIwhCJRCaIwhCJRCaIwhCJRCaIwhCJRCa4ojCcPHmSD3/4w9x7773cd999
+fPvb3wbga1/7GouLizzwwAM88MAD/PjHP67v841vfIMjR47w7ne/m5/97Gc7
+d/aRSGRHSK54QJLwzW9+kwcffJC1tTXe97738eijjwLwxS9+ka985Ssjx7/8
+8sv88Ic/5KWXXuL111/nIx/5CL/97W9RSu3MK4hEItvOFS2GQ4cO8eCDDwIw
+NzfHPffcw+nTpzc9/vnnn+cTn/gErVaLu+++myNHjvDCCy9s3xlHIpGrR4ir
+OvyqYgyvvfYav/71r3n44YcB+M53vsP999/PU089xdLSEgCnT5/mjjvuqO9z
++PDhqUJy7NgxHnroIR566CFK8qs66UgkcpWIqwsnbvno9fV1Hn/8cb71rW8x
+Pz/P008/zSuvvMKLL77IoUOH+PKXv3xVT3z06FGOHz/O8ePHSUX7qu4biUSu
+DnGVrvyWhKEsSx5//HE+/elP8/GPfxyAAwcOoJRCSsnnPve52l1YXFzk5MmT
+9X1PnTr1/7dzN7GspWEcwP+Hjju5bpgIRZoMOWnd0PaQKLGyIMRGxUYshISd
+hYWELQtBYt0FscFCd3RRxM5XiI/GpivxsdJ0fIwwEqT63MXECXOmtzqOvqeZ
+57dq6rT+nqRPTl/v+8BiscQPncZrEIx9lrSsb4ldH+8CIkJPTw9KS0vR39+v
+Ph8KhdTHCwsLcDgcAAC32w2v14vHx0ecnp7i6OgI1dXVP/8lv5iQnvUNkinu
+WihjLEHSly9Azm8JvSbuJ3Frawtzc3NwOp2oqKgAAIyOjmJ+fh6Hh4eQJAnF
+xcWYnJwEANjtdrS1taGsrAwmkwkejyfufySef01H1PY70v78CxT6AxSJAM/P
+oCgBFP37IqKE/jDG/pdeFhmlNEhpEtK+fgUs+XiwZAHXCbwNkfhPXG5uLjIz
+M5GXlyc6SlwXFxcpkRNInaycU3//lvXs7AyXl5fver0hGgMAuFwu7O/vi44R
+V6rkBFInK+fU30ez8pZoxpgGNwbGmEb68PDwsOgQLyorK0VHeJdUyQmkTlbO
+qb+PZDXMGgNjzDj4qwRjTEN4Y1hZWcH3799htVoxPj4uOo5GcXGxuofD5XIB
+AK6vr9HQ0ACbzYaGhgb1nEgydXd3w2w2qxvLfpaLiNDX1wer1QpFURAIBIRn
+NeKx/VgjBoxW16SMQiCBIpEIybJMx8fH9Pj4SIqiUDAYFBlJo6ioiC4uLt48
+NzAwQGNjY0RENDY2RoODg0nPtba2RgcHB2S32+Pm8vv91NTURNFolLa3t6m6
+ulp41qGhIZqYmNBcGwwGSVEUenh4oJOTE5JlmSKRSFJynp+f08HBARER3d7e
+ks1mo2AwaLi6xsqpZ02F3jHs7u7CarVClmVkZGSgvb0dPp9PZKR38fl86Orq
+AgB0dXVhcXEx6Rlqa2uRk5Pzrlw+nw+dnZ2QJAk1NTW4ubl5s6VdRNZYRB7b
+jzViwGh1TcYoBKGN4b1HtEWSJAmNjY2orKzE1NQUACAcDqOwsBAAUFBQgHA4
+LDKiKlYuo9b5I8f2P9vrEQNGrqueoxBeE77GYHSbm5sIBAJYXl6Gx+PB+vr6
+m59LkgQpwSEYyWDUXC8+emz/M/1zxMBrRqqr3qMQXhPaGP7LEe1ke8ljNpvR
+2tqK3d1d5Ofnq7eMoVAIZrNZZERVrFxGrLOex/b1FGvEgNHq+tmjEIQ2hqqq
+KhwdHeH09BRPT0/wer1wu90iI71xf3+Pu7s79fHq6iocDgfcbjdmZmYAADMz
+M2hpaREZUxUrl9vtxuzsLIgIOzs7yM7OVm+NRdH12L5OKMaIAaPVNVZOXWuq
++5Jpgvx+P9lsNpJlmUZGRkTHeeP4+JgURSFFUaisrEzNd3l5SXV1dWS1Wqm+
+vp6urq6Snq29vZ0KCgrIZDKRxWKh6enpmLmi0Sj19vaSLMvkcDhob29PeNaO
+jg5yOBzkdDqpubmZzs/P1etHRkZIlmUqKSmhpaWlpOXc2NggAOR0Oqm8vJzK
+y8vJ7/cbrq6xcupZU975yBjT4MVHxpgGNwbGmAY3BsaYBjcGxpgGNwbGmAY3
+BsaYBjcGxpgGNwbGmMYPp1UtVbEPaDkAAAAASUVORK5CYII=
+" /></p>
+<p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><br /></p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" color:#000080;">In [</span><span style=" font-weight:600; color:#000080;">194</span><span style=" color:#000080;">]:</span> runfile('/Users/muthuvel/Documents/GitHub/Generative-Adversarial-Networks-for-Brain-Tumor-Segmentation/code-python3/test.py', wdir='/Users/muthuvel/Documents/GitHub/Generative-Adversarial-Networks-for-Brain-Tumor-Segmentation/code-python3')</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" text-decoration: underline; color:#a52a2a;">Reloaded modules</span><span style=" color:#a52a2a;">: data</span></p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Traceback <span style=" color:#4682b4;">(most recent call last)</span>:</p>
+<p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><br /></p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">  File <span style=" color:#00ff00;">&quot;&lt;ipython-input-194-8c2b023a0d02&gt;&quot;</span>, line <span style=" color:#00ff00;">1</span>, in <span style=" color:#ff00ff;">&lt;module&gt;</span></p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">    runfile('/Users/muthuvel/Documents/GitHub/Generative-Adversarial-Networks-for-Brain-Tumor-Segmentation/code-python3/test.py', wdir='/Users/muthuvel/Documents/GitHub/Generative-Adversarial-Networks-for-Brain-Tumor-Segmentation/code-python3')</p>
+<p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><br /></p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">  File <span style=" color:#00ff00;">&quot;/anaconda3/envs/ComputerVsion/lib/python3.6/site-packages/spyder/utils/site/sitecustomize.py&quot;</span>, line <span style=" color:#00ff00;">705</span>, in <span style=" color:#ff00ff;">runfile</span></p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">    execfile(filename, namespace)</p>
+<p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><br /></p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">  File <span style=" color:#00ff00;">&quot;/anaconda3/envs/ComputerVsion/lib/python3.6/site-packages/spyder/utils/site/sitecustomize.py&quot;</span>, line <span style=" color:#00ff00;">102</span>, in <span style=" color:#ff00ff;">execfile</span></p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">    exec(compile(f.read(), filename, 'exec'), namespace)</p>
+<p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><br /></p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">  File <span style=" color:#00ff00;">&quot;/Users/muthuvel/Documents/GitHub/Generative-Adversarial-Networks-for-Brain-Tumor-Segmentation/code-python3/test.py&quot;</span>, line <span style=" color:#00ff00;">16</span>, in <span style=" color:#ff00ff;">&lt;module&gt;</span></p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">    imgs = np.load('../results/imgs_mask_test.npy')</p>
+<p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><br /></p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" color:#4682b4;">  File </span><span style=" color:#006400;">&quot;/anaconda3/envs/ComputerVsion/lib/python3.6/site-packages/numpy/lib/npyio.py&quot;</span><span style=" color:#4682b4;">, line </span><span style=" color:#006400;">372</span><span style=" color:#4682b4;">, in </span><span style=" color:#9400d3;">load</span></p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" color:#8b0000;">    fid = open(file, &quot;rb&quot;)</span></p>
+<p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><br /></p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" color:#8b0000;">FileNotFoundError:</span> [Errno 2] No such file or directory: '../results/imgs_mask_test.npy'</p>
+<p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><br /></p>
+<p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><br /></p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" color:#000080;">In [</span><span style=" font-weight:600; color:#000080;">195</span><span style=" color:#000080;">]:</span> </p>
+<p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><br /></p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" color:#000080;">In [</span><span style=" font-weight:600; color:#000080;">195</span><span style=" color:#000080;">]:</span> c = imgs[305,:,:,0]</p>
+<p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><br /></p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" color:#000080;">In [</span><span style=" font-weight:600; color:#000080;">196</span><span style=" color:#000080;">]:</span> [x,y] = np.where(c&gt;0.3719138391315937)</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" color:#000080;">     ...:</span> c[:,:] = 0</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" color:#000080;">     ...:</span> c[x,y] = 1</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" color:#000080;">     ...:</span> plt.imshow(c, &quot;gray&quot;)</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" color:#8b0000;">Out[</span><span style=" font-weight:600; color:#8b0000;">196</span><span style=" color:#8b0000;">]:</span> &lt;matplotlib.image.AxesImage at 0x37c3fb6d8&gt;</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><img src="data:image/png;base64,
+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
+GHgoAT8gDD7DmcOTEc7iIAwAHITBZ/g/4vTYN8VDGHyEH/zpsW+KizD4DNcY
+XESh+AgDfO1J/2YmvEMYfCYQCPB/yP9gfxQf/64EfIUI+ANhgC8QBH/J+1Ci
+s7NTwWBQ0Wg0d9v+/fsVCoXU0tKilpYWnTp1Kvdn3d3dikQiWrVqlb777jtv
+pl4EFtOBspi+17JheZw7d84uXbpkzc3Nuds++eQT++KLL5x1h4aGLBaL2V9/
+/WW///67hcNhu3//fr5NmCSWaZaFrNT7drEt8Xi84L+bvGcMr776qp577rl8
+q0mS+vr61NHRoaeeekovvfSSIpGIBgYGCrovFhfOEvxt1s9KHDhwQLFYTJ2d
+nbp165YkKZ1Oq66uLrdObW2t0un0Y++fTCbV2tqq1tbW2Y6wKCy0A4hnXcrD
+rMKwe/duXb16VYODg6qpqdFHH30046/R1dWlVCqlVCo1mxEWlXI+mB7OXs7f
+w2I0qzBUVVWpoqJCS5Ys0QcffJB7uBAKhTQ6Oppbb2xsTKFQaH4mRdkdXOU0
+Kx41qzBkMpncr0+cOJF7xiKRSOjYsWO6d++eRkZGNDw8rPXr18/PpMgpt0Cg
+/OR9HcNbb72lH3/8URMTE6qtrdWnn36qH3/8UYODgwoEAqqvr9ehQ4ckSc3N
+zdqxY4eamppUWVmpgwcPqqKiwvNvAv5DuMpb4MHTRqUdgh+iWfPBX5+Dv09/
+isfjBV/T45WPZe6/B2EpQ0EQFg7CsMBMPTi9jgQhWLgIwwLmZSSIwsLG264X
+ifk8kInCwscZwyLypOsRhZ5dEIXFgTAsYtMd5Bz84KEEAAdhAOAgDAAchAGA
+gzAAcBAGAA7CAMBBGAA4CAMAB2EA4CAMAByEAYCDMABwEAYADsIAwEEYADgI
+AwAHYQDgIAwAHIQBgIMwAHAQBgAOwgDAQRgAOAgDAAdhAOAgDAAcecMwOjqq
+jRs3qqmpSc3Nzfrqq68kSTdv3lR7e7saGhrU3t6uW7duSfr/P4i6d+9eRSIR
+xWIxXb582dvvAMD8szzGx8ft0qVLZmb2559/WkNDgw0NDdnHH39s3d3dZmbW
+3d1t+/btMzOz/v5+27x5s01OTtr58+dt/fr1+TZhklhYWDxe4vF43mMxd0wW
+vOYDiUTCzp49a42NjTY+Pp6LR2Njo5mZdXV12ZEjR3LrT12PMLCwlG6ZSRhm
+dI3h2rVrunLlijZs2KBsNquamhpJUnV1tbLZrCQpnU6rrq4ud5/a2lql0+mZ
+bAZAiVUWuuKdO3e0fft2ffnll1q+fPkjfxYIBBQIBGa04WQyqWQyOaP7ACiO
+gs4Y/vnnH23fvl3vvPOOtm3bJkmqqqpSJpORJGUyGQWDQUlSKBTS6Oho7r5j
+Y2MKhULO1+zq6lIqlVIqlZrzNwFgfuUNg5lp165dWr16tT788MPc7YlEQr29
+vZKk3t5ebdmyJXf74cOHZWa6cOGCVqxYkXvIAaBM5LsI8fPPP5skW7Nmja1d
+u9bWrl1r/f39NjExYZs2bbJIJGJtbW1248YNMzObnJy0PXv2WDgctmg0ahcv
+Xsx7oUM+uDDDwrLQl5lcfAw8ODBLaqbXJwDMXDweL/ihO698BOAgDAAchAGA
+gzAAcBAGAA7CAMBBGAA4CAMAB2EA4CAMAByEAYCDMABwEAYADsIAwEEYADgI
+AwAHYQDgIAwAHIQBgIMwAHAQBgAOwgDAQRgAOAgDAAdhAOAgDAAchAGAgzAA
+cBAGAA7CAMBBGAA4CAMAB2EA4CAMABx5wzA6OqqNGzeqqalJzc3N+uqrryRJ
++/fvVygUUktLi1paWnTq1Kncfbq7uxWJRLRq1Sp999133k0PwBuWx/j4uF26
+dMnMzP78809raGiwoaEh++STT+yLL75w1h8aGrJYLGZ//fWX/f777xYOh+3+
+/ftP3IYkFhYWj5d4PJ7vcM/Je8ZQU1Ojl19+WZK0bNkyrV69Wul0etr1+/r6
+1NHRoaeeekovvfSSIpGIBgYG8m0GgI/M6BrDtWvXdOXKFW3YsEGSdODAAcVi
+MXV2durWrVuSpHQ6rbq6utx9amtrHxuSZDKp1tZWtba2zmV+AB4oOAx37tzR
+9u3b9eWXX2r58uXavXu3rl69qsHBQdXU1Oijjz6a0Ya7urqUSqWUSqVmPDQA
+bxUUhn/++Ufbt2/XO++8o23btkmSqqqqVFFRoSVLluiDDz7IPVwIhUIaHR3N
+3XdsbEyhUMiD0QF4JW8YzEy7du3S6tWr9eGHH+Zuz2QyuV+fOHFC0WhUkpRI
+JHTs2DHdu3dPIyMjGh4e1vr16z0YHYBXKvOt8Ouvv+rbb7/VmjVr1NLSIkn6
+/PPPdfToUQ0ODioQCKi+vl6HDh2SJDU3N2vHjh1qampSZWWlDh48qIqKCm+/
+CwDzKvDg6cKSeuGFF/T000/rxRdfLPUoeV2/fr0s5pTKZ1bmnH+Pm/XatWua
+mJgo6P6+CIMktba2lsWFyHKZUyqfWZlz/s11Vl4SDcBBGAA4Kvbv37+/1EM8
+FI/HSz1CQcplTql8ZmXO+TeXWX1zjQGAf/BQAoCj5GE4c+aMVq1apUgkop6e
+nlKP46ivr8+9huPh+zpu3ryp9vZ2NTQ0qL29Pfc+kWLq7OxUMBjMvbDsSXOZ
+mfbu3atIJKJYLKbLly+XfFY/vm1/uo8Y8Nt+LcpHIRT8PkwP3L9/38LhsF29
+etXu3btnsVjMhoaGSjmSY+XKlXb9+vVHbvv444+tu7vbzMy6u7tt3759RZ/r
+3LlzdunSJWtubs47V39/v23evNkmJyft/Pnztn79+pLPOp9v258v033EgN/2
+azE+CqGkZwwDAwOKRCIKh8NaunSpOjo61NfXV8qRCtLX16edO3dKknbu3KmT
+J08WfYZXX31Vzz33XEFz9fX16b333lMgENArr7yiP/7445GXtJdi1umU8m37
+033EgN/2azE+CqGkYSj0LdqlFAgE9NprrykejyuZTEqSstmsampqJEnV1dXK
+ZrOlHDFnurn8up/n8rZ9r039iAE/79f5/CiEqUp+jcHvfvnlF12+fFmnT5/W
+wYMH9dNPPz3y54FAQIFAoETTTc+vcz0017fte+m/HzEwlZ/263x/FMJUJQ1D
+ObxF++E8wWBQW7du1cDAgKqqqnKnjJlMRsFgsJQj5kw3lx/3s1/ftj/dRwz4
+bb96/VEIJQ3DunXrNDw8rJGREf399986duyYEolEKUd6xN27d3X79u3cr8+e
+PatoNKpEIqHe3l5JUm9vr7Zs2VLKMXOmmyuRSOjw4cMyM124cEErVqzInRqX
+ih/ftm/TfMSA3/brdHPO6z6d90umM9Tf328NDQ0WDofts88+K/U4j7h69arF
+YjGLxWLW1NSUm29iYsI2bdpkkUjE2tra7MaNG0WfraOjw6qrq62ystJCoZB9
+/fXX0841OTlpe/bssXA4bNFo1C5evFjyWd99912LRqO2Zs0ae+ONN2x8fDy3
+/meffWbhcNgaGxvt1KlTRZvz559/Nkm2Zs0aW7t2ra1du9b6+/t9t1+nm3M+
+9ymvfATg4OIjAAdhAOAgDAAchAGAgzAAcBAGAA7CAMBBGAA4/geJbYli390V
+/QAAAABJRU5ErkJggg==
+" /></p>
+<p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><br /></p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" color:#000080;">In [</span><span style=" font-weight:600; color:#000080;">197</span><span style=" color:#000080;">]:</span> imgs_test_label[305,:,:,0]</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" color:#8b0000;">Out[</span><span style=" font-weight:600; color:#8b0000;">197</span><span style=" color:#8b0000;">]:</span> </p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">array([[0., 0., 0., ..., 0., 0., 0.],</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">       [0., 0., 0., ..., 0., 0., 0.],</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">       [0., 0., 0., ..., 0., 0., 0.],</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">       ...,</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">       [0., 0., 0., ..., 0., 0., 0.],</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">       [0., 0., 0., ..., 0., 0., 0.],</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">       [0., 0., 0., ..., 0., 0., 0.]])</p>
+<p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><br /></p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" color:#000080;">In [</span><span style=" font-weight:600; color:#000080;">198</span><span style=" color:#000080;">]:</span> plt.imshow(imgs_test_label[305,:,:,0])</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" color:#8b0000;">Out[</span><span style=" font-weight:600; color:#8b0000;">198</span><span style=" color:#8b0000;">]:</span> &lt;matplotlib.image.AxesImage at 0x379228d68&gt;</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><img src="data:image/png;base64,
+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
+WMZmbsSZfmIv5Cf6zPVMDUKuexO5ro+9h8IiDCXmxoY110/pueIwWwwWE4iZ
+ccglEMSh+HHycZnIZWPMtMzUw4apZu41TH08k/kcdqBw2GMoIVM33KU42ZjJ
+09/dl97ACzkH3EMYlqGZv8lg48ZMHEosEzd2+2dGYLY4zLa7n+2x2U5EZjrM
+mM/hBNc3FAZ7DCUq08Y1dTd/5uPz3TNY6B7FXBv+fM8xEIXCIAw3kWwbXa4b
+5WyHGfk83HDj0m3kF2EoITM3qEy78sUg0x4KUSgNhKHEzBaHfFztOPX1Zvvz
+Yl/r088biUIJ4ZLoIpbtAp9cblya7dqETJc4z2U+Jw0//bwxvV7uuiwe3F25
+TOSy0d1YZq4LnHLZ4Gf+9M/HbHMhCIVFGJaJqT/Fbxz/Z9rYM0XEzUMBQlBc
+CMMyMjMONx6bbTksb4ShiPn3DuT9RqJi3OjZWyg+hAEFQxCKF2Eocm7sNRQS
+MSgNXMdQAm6Gjcm/d+CmeB/LRdY9hq6uLv3zn/+U1+vVV199JUnat2+f/va3
+v+mOO+6QJO3fv18PP/ywJOnAgQM6fPiwysrK9Ne//lUPPvigi+MvHzc2qkLu
+PbBhLx9Z9xieeuop9ff3W4/v3btXQ0NDGhoaSkfh3Llz6uvr0/DwsPr7+/Xc
+c8/p+vXr+Z96GSvUxkkUlpesYWhtbVV5eXlOLxaNRtXR0aFVq1bpzjvvlN/v
+1+Dg4KKHxHRLvZESheVnwecYDh48qEAgoK6uLk1MTEiSEomEampq0stUV1cr
+kUjM+vxIJKJgMKhgMKirmlzoGMsWGyvctKAw7N69W+fPn9fQ0JCqqqr04osv
+zvs1uru7FYvFFIvFdItWLWSMZe/GCT23I8H/Sm75WVAYKioqVFZWphUrVujZ
+Z59NHy74fD6Njo6mlxsbG5PP58vPpJgTZ/2RTwsKQzKZTP/5/fffV1NTkyQp
+HA6rr69Pk5OTGhkZUTwe19atW/MzKXJCIJAPWX9d+dhjj+n06dMaHx9XdXW1
+Xn/9dZ0+fVpDQ0NyHEe1tbV69913JUmNjY1qb29XQ0ODPB6PDh06pLKyMtff
+BGwz48ChAOaD72NYZmYLRKY9jBvLsgdyc+D7GJDRfC6UIgjLF2FYptjoMRfu
+lQBgIQwALIQBgIUwALAQBgAWwgDAQhgAWAgDAAthAGAhDAAshAGAhTAAsBAG
+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
+" /></p>
+<p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><br /></p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" color:#000080;">In [</span><span style=" font-weight:600; color:#000080;">199</span><span style=" color:#000080;">]:</span> plt.imshow(imgs_test_label[305,:,:,0], cmap = &quot;gray{)</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" color:#4682b4;">  File </span><span style=" color:#006400;">&quot;&lt;ipython-input-199-50a9aa008b0f&gt;&quot;</span><span style=" color:#4682b4;">, line </span><span style=" color:#006400;">1</span></p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" color:#8b0000;">    plt.imshow(imgs_test_label[305,:,:,0], cmap = &quot;gray{)</span></p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">                                                         ^</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" color:#8b0000;">SyntaxError:</span> EOL while scanning string literal</p>
+<p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><br /></p>
+<p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><br /></p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" color:#000080;">In [</span><span style=" font-weight:600; color:#000080;">200</span><span style=" color:#000080;">]:</span> </p>
+<p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><br /></p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" color:#000080;">In [</span><span style=" font-weight:600; color:#000080;">200</span><span style=" color:#000080;">]:</span> plt.imshow(imgs_test_label[305,:,:,0], cmap = &quot;gray&quot;)</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" color:#8b0000;">Out[</span><span style=" font-weight:600; color:#8b0000;">200</span><span style=" color:#8b0000;">]:</span> &lt;matplotlib.image.AxesImage at 0x36166e9e8&gt;</p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><img src="data:image/png;base64,
+iVBORw0KGgoAAAANSUhEUgAAAQYAAAD8CAYAAACVSwr3AAAACXBIWXMAAAsS
+AAALEgHS3X78AAAAOXpUWHRTb2Z0d2FyZQAACJnLTSwpyMkvyclMUihLLSrO
+zM9TMNIDQh2FjJKSAit9/Vy4Ar38onR9AKceEPLGlRjzAAARyElEQVR4nO3d
+TWxbVd7H8Z+bCBYj6AxDnURORLCcVE1ctxqnZVZQGgUqJFyVSp1A0RQFEald
+VJoi2E6QEInEBkbtAgOLdCSI2ECkCYSyIOFFdFK3ZEHYRJ1UShzLIm1HvEhT
+2ub/LB5qpTlxbce+sZ18P9KRksu9vn8bnZ/PPTn31mdmJgBYYlO5CwBQeQgG
+AA6CAYCDYADgIBgAOAgGAA7PgmF0dFRbt25VKBTSwMCAV6cB4AGfF+sYbt68
+qdbWVn322WdqbGzUrl279P7776utra3UpwLgAU9GDBMTEwqFQgoGg7rrrrvU
+3d2t4eFhL04FwAO1XrxoMplUU1NT5vfGxkb9+9//zrq/z+fzogwAS/zxj3/U
+wsJCXvt6Egz5iMfjisfj5To9sOE0Nzfnva8nwRAIBDQ7O5v5fW5uToFA4LZ9
+ent71dvbK4kRA1BpPJlj2LVrl6anpzUzM6Nff/1VQ0NDisViXpwKgAc8GTHU
+1tbq5MmTevzxx3Xz5k319PSovb3di1MB8IAnf64suAguJQDPRaNRJRKJvPZl
+5SMAB8EAwEEwAHAQDAAcBAMAB8EAwEEwAHAQDAAcBAMAB8EAwEEwAHAQDAAc
+BAMAB8EAwEEwAHAQDAAcBAMAB8EAwEEwAHAQDAAcBAMAB8EAwEEwAHAQDAAc
+BAMAB8EAwEEwAHAQDAAcBAMAB8EAwEEwAHAQDAAcBAMAB8EAwFFbzMHNzc26
+5557VFNTo9raWiUSCV25ckV/+ctfdOnSJTU3N+uDDz7QH/7wh1LVC2ANFD1i
++PzzzzU5OalEIiFJGhgYUGdnp6anp9XZ2amBgYGiiwSwtkp+KTE8PKwjR45I
+ko4cOaKPPvqo1KcA4LGigsHn8+mxxx5TNBpVPB6XJKXTaTU0NEiS6uvrlU6n
+Vzw2Ho+ro6NDHR0dxZQAwAtWhLm5OTMzS6fTFolEbHx83DZv3nzbPr///e9z
+vo4kGo3mcYtGo3n37aJGDIFAQJLk9/t14MABTUxMqK6uTqlUSpKUSqXk9/uL
+OQWAMlh1MPzyyy/66aefMj+fOXNG4XBYsVhMg4ODkqTBwUHt37+/NJUCWDOr
+/nNlOp3WgQMHJEk3btzQM888o3379mnXrl06dOiQ3n33XT3wwAP64IMPSlYs
+gLXh++0av7xF+HzlLgFY96LRaGZZQS6sfATgIBgAOAgGAA6CAYCDYADgIBgA
+OAgGAA6CAYCDYADgIBgAOAgGAA6CAYCDYADgIBgAOAgGAA6CAYCDYADgIBgA
+OAgGAA6CAYCDYADgIBgAOAgGAA6CAYCDYADgIBgAOAgGAA6CAYCDYADgIBgA
+OAgGAA6CAYCDYADgyBkMPT098vv9CofDmW1XrlxRV1eXWlpa1NXVpatXr0qS
+zEzHjx9XKBRSJBLRhQsXvKscgGdyBsNzzz2n0dHR27YNDAyos7NT09PT6uzs
+1MDAgCTpk08+0fT0tKanpxWPx3X06FFvqgbgLcvDzMyMtbe3Z35vbW21+fl5
+MzObn5+31tZWMzPr7e219957b8X97kQSjUbzuEWj0Xy6u5mZrWqOIZ1Oq6Gh
+QZJUX1+vdDotSUomk2pqasrs19jYqGQyuZpTACij2mJfwOfzyefzFXxcPB5X
+PB4v9vQAPLCqEUNdXZ1SqZQkKZVKye/3S5ICgYBmZ2cz+83NzSkQCKz4Gr29
+vUokEkokEqspAYCHVhUMsVhMg4ODkqTBwUHt378/s/306dMyM509e1abN2/O
+XHIAqCK5JiG6u7utvr7eamtrLRAI2DvvvGMLCwu2d+9eC4VC1tnZaZcvXzYz
+s8XFRTt27JgFg0ELh8N27ty5vCY6VAETMzTaem+FTD76fuuYZbWaOQoAhYlG
+o3lfurPyEYCDYADgIBgAOAgGAA6CAYCDYADgIBgAOIq+VwLrW19f35oeh8rA
+AqcNaK07LSFRGQpZ4EQwVJn10MnWw3uoRgTDOrQeO9N6fE+VjCXR60yxHWjP
+nj1F17Bnz55MK9Xr9vX1EQ4VihFDFVip86zUKcfGxkp+7nw7f7HnJiC8x6XE
+OpCro2TrsKUKh2JHA6upg3DwFpcSG8gjjzySaWtxrnytdOmRC8FQORgxVKg7
+dZI9e/Zk7aTj4+O3/b6ab+7lnXmlc42Pj2e2Lz/nneRbDyFReowYNrDlnTjb
+N/ZqvtGXn2dpIOQ7msj3fARDeREMVeZWx7rTt/SdwmGlMCgmIJaHQz4BQThU
+PpZEbxD5dMZs+yy9bFhq+ahh6fZsCrnsQPkwYqgiSzvuWkw2ZjM+Pp7p4OWs
+A94hGDag5X/JoHNjOS4lNohbw/7lIbBSOKw03M+1baWJyGyXGYVcTrA6sjwY
+MVSpbJ1r6TB/+fZCRwarHVHcqeMXOsdAKJQHwbCO5Op0+XbKlS4zSnm54cXS
+bZQWwVBFlneobEP5SpBthEIoVAeCocqsFA6lWO249PVW+rnY1xobGyMUqghL
+oitYoTdSrdTxVlqbkG2J850UMmk4NjaWOS93XVaOQpZE81eJKpZPp7u1z50W
+OOXT4Zd/++d73tUiEMqLYNggln6L37r+z9bZvb6leyUEQWUhGDaQ5eFwa9tK
++2FjY46hwm2Eb9KN8B4rAXMMqAoEQuVixFAF1lMHWk/vpdrwzMd1qNo7VLXX
+vx6UNBh6enr0r3/9S36/X999952k//+f/Pbbb2vLli2SpNdee01PPPGEJKm/
+v1/vvvuuampq9I9//EOPP/547iIIhryVs4PRuatbSR/t9txzz2l0dNTZ/re/
+/U2Tk5OanJzMhML333+voaEhTU1NaXR0VMeOHdPNmzcLLB93Uq7OSShsLDmD
+4eGHH9Z9992X14sNDw+ru7tbd999tx588EGFQiFNTEwUXSRux789Ca+t+l6J
+kydPKhKJqKenR1evXpUkJZNJNTU1ZfZpbGxUMplc8fh4PK6Ojg51dHSstoQN
+jc4KL60qGI4ePaqLFy9qcnJSDQ0NevHFFwt+jd7eXiUSibyveeC69RATr0OC
+h6VsPKsKhrq6OtXU1GjTpk164YUXMpcLgUBAs7Ozmf3m5uYUCARKUynuiM6L
+UlpVMKRSqczPH374ocLhsCQpFotpaGhI165d08zMjKanp7V79+7SVIq8EBAo
+hZwrH59++mmNjY1pYWFBjY2NeuWVVzQ2NqbJyUn5fD41NzfrrbfekiS1t7fr
+0KFDamtrU21trU6dOqWamhrP3wRcy8OBsEAhWOC0wawUENlC49Z2QmV9YOUj
+clra2en4GwPBAMDBP2oLoCgEAwAHwQDAQTAAcBAMABwEAwAHwQDAQTAAcBAM
+ABwEAwAHwQDAQTAAcBAMABwEAwAHwQDAQTAAcBAMABwEAwAHwQDAQTAAcBAM
+ABwEAwAHwQDAQTAAcBAMABwEAwAHwQDAQTAAcBAMABwEAwAHwQDAkTMYZmdn
+9eijj6qtrU3t7e168803JUlXrlxRV1eXWlpa1NXVpatXr0qSzEzHjx9XKBRS
+JBLRhQsXvH0HAErPcpifn7fz58+bmdmPP/5oLS0tNjU1ZS+99JL19/ebmVl/
+f7+9/PLLZmY2MjJi+/bts8XFRfvmm29s9+7duU5hkmg0msctGo3m7IuZPpn3
+nr+JxWJ25swZa21ttfn5+Ux4tLa2mplZb2+vvffee5n9l+5HMNBo5WuFBENB
+cwyXLl3St99+q4ceekjpdFoNDQ2SpPr6eqXTaUlSMplUU1NT5pjGxkYlk8lC
+TgOgzGrz3fHnn3/WwYMH9cYbb+jee++97b/5fD75fL6CThyPxxWPxws6BsDa
+yGvEcP36dR08eFCHDx/WU089JUmqq6tTKpWSJKVSKfn9fklSIBDQ7Oxs5ti5
+uTkFAgHnNXt7e5VIJJRIJIp+EwBKK2cwmJmef/55bdu2TSdOnMhsj8ViGhwc
+lCQNDg5q//79me2nT5+Wmens2bPavHlz5pIDQJXINQnx5ZdfmiTbvn277dix
+w3bs2GEjIyO2sLBge/futVAoZJ2dnXb58mUzM1tcXLRjx45ZMBi0cDhs586d
+yznRoQqYmKHR1nsrZPLR91vHLKtC5ycAFC4ajeZ96c7KRwAOggGAg2AA4CAY
+ADgIBgAOggGAg2AA4CAYADgIBgAOggGAg2AA4CAYADgIBgAOggGAg2AA4CAY
+ADgIBgAOggGAg2AA4CAYADgIBgAOggGAg2AA4CAYADgIBgAOggGAg2AA4CAY
+ADgIBgAOggGAg2AA4CAYADgIBgAOggGAI2cwzM7O6tFHH1VbW5va29v15ptv
+SpL6+voUCAS0c+dO7dy5Ux9//HHmmP7+foVCIW3dulWffvqpd9UD8IblMD8/
+b+fPnzczsx9//NFaWlpsamrK/v73v9vrr7/u7D81NWWRSMT+97//2X/+8x8L
+BoN248aNO55DEo1G87hFo9Fc3T0j54ihoaFBf/rTnyRJ99xzj7Zt26ZkMpl1
+/+HhYXV3d+vuu+/Wgw8+qFAopImJiVynAVBBCppjuHTpkr799ls99NBDkqST
+J08qEomop6dHV69elSQlk0k1NTVljmlsbFwxSOLxuDo6OtTR0VFM/QA8kHcw
+/Pzzzzp48KDeeOMN3XvvvTp69KguXryoyclJNTQ06MUXXyzoxL29vUokEkok
+EgUXDcBbeQXD9evXdfDgQR0+fFhPPfWUJKmurk41NTXatGmTXnjhhczlQiAQ
+0OzsbObYubk5BQIBD0oH4JWcwWBmev7557Vt2zadOHEisz2VSmV+/vDDDxUO
+hyVJsVhMQ0NDunbtmmZmZjQ9Pa3du3d7UDoAr9Tm2uHrr7/WP//5T23fvl07
+d+6UJL322mt6//33NTk5KZ/Pp+bmZr311luSpPb2dh06dEhtbW2qra3VqVOn
+VFNT4+27AFBSvt/+XFhW999/v373u99py5Yt5S4lpx9++KEq6pSqp1bqLL2V
+ar106ZIWFhbyOr4igkGSOjo6qmIislrqlKqnVuosvWJrZUk0AAfBAMBR09fX
+11fuIm6JRqPlLiEv1VKnVD21UmfpFVNrxcwxAKgcXEoAcJQ9GEZHR7V161aF
+QiENDAyUuxxHc3NzZg3Hrfs6rly5oq6uLrW0tKirqytzn8ha6unpkd/vzyws
+u1NdZqbjx48rFAopEonowoULZa+1Em/bz/aIgUr7XNfkUQh534fpgRs3blgw
+GLSLFy/atWvXLBKJ2NTUVDlLcjzwwAP2ww8/3LbtpZdesv7+fjMz6+/vt5df
+fnnN6xofH7fz589be3t7zrpGRkZs3759tri4aN98843t3r277LWW8rb9Usn2
+iIFK+1zX4lEIZR0xTExMKBQKKRgM6q677lJ3d7eGh4fLWVJehoeHdeTIEUnS
+kSNH9NFHH615DQ8//LDuu+++vOoaHh7WX//6V/l8Pv35z3/Wf//739uWtJej
+1mzKedt+tkcMVNrnuhaPQihrMOR7i3Y5+Xw+PfbYY4pGo4rH45KkdDqthoYG
+SVJ9fb3S6XQ5S8zIVlelfs7F3LbvtaWPGKjkz7WUj0JYquxzDJXuq6++0oUL
+F/TJJ5/o1KlT+uKLL2777z6fTz6fr0zVZVepdd1S7G37Xlr+iIGlKulzLfWj
+EJYqazBUwy3at+rx+/06cOCAJiYmVFdXlxkyplIp+f3+cpaYka2uSvycK/W2
+/WyPGKi0z9XrRyGUNRh27dql6elpzczM6Ndff9XQ0JBisVg5S7rNL7/8op9+
++inz85kzZxQOhxWLxTQ4OChJGhwc1P79+8tZZka2umKxmE6fPi0z09mzZ7V5
+8+bM0LhcKvG2fcvyiIFK+1yz1VnSz7TkU6YFGhkZsZaWFgsGg/bqq6+Wu5zb
+XLx40SKRiEUiEWtra8vUt7CwYHv37rVQKGSdnZ12+fLlNa+tu7vb6uvrrba2
+1gKBgL3zzjtZ61pcXLRjx45ZMBi0cDhs586dK3utzz77rIXDYdu+fbs9+eST
+Nj8/n9n/1VdftWAwaK2trfbxxx+vWZ1ffvmlSbLt27fbjh07bMeOHTYyMlJx
+n2u2Okv5mbLyEYCDyUcADoIBgINgAOAgGAA4CAYADoIBgINgAOAgGAA4/g/h
+b2UxUL+6MQAAAABJRU5ErkJggg==
+" /></p>
+<p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><br /></p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" color:#000080;">In [</span><span style=" font-weight:600; color:#000080;">201</span><span style=" color:#000080;">]:</span> </p></body></html>

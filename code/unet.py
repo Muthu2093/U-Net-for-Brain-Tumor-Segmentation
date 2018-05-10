@@ -30,90 +30,28 @@ class myUnet(object):
 
     def get_unet(self):
 
-		inputs = Input((self.img_rows, self.img_cols,1))
+		inputs = Input((self.img_rows, self.img_cols,176))
 		
-		'''
-		unet with crop(because padding = valid) 
-        
-		conv1 = Conv2D(64, 3, activation = 'relu', padding = 'valid', kernel_initializer = 'he_normal')(inputs)
-		print "conv1 shape:",conv1.shape
-		conv1 = Conv2D(64, 3, activation = 'relu', padding = 'valid', kernel_initializer = 'he_normal')(conv1)
-		print "conv1 shape:",conv1.shape
-		crop1 = Cropping2D(cropping=((90,90),(90,90)))(conv1)
-		print "crop1 shape:",crop1.shape
-		pool1 = MaxPooling2D(pool_size=(2, 2))(conv1)
-		print "pool1 shape:",pool1.shape
-
-		conv2 = Conv2D(128, 3, activation = 'relu', padding = 'valid', kernel_initializer = 'he_normal')(pool1)
-		print "conv2 shape:",conv2.shape
-		conv2 = Conv2D(128, 3, activation = 'relu', padding = 'valid', kernel_initializer = 'he_normal')(conv2)
-		print "conv2 shape:",conv2.shape
-		crop2 = Cropping2D(cropping=((41,41),(41,41)))(conv2)
-		print "crop2 shape:",crop2.shape
-		pool2 = MaxPooling2D(pool_size=(2, 2))(conv2)
-		print "pool2 shape:",pool2.shape
-
-		conv3 = Conv2D(256, 3, activation = 'relu', padding = 'valid', kernel_initializer = 'he_normal')(pool2)
-		print "conv3 shape:",conv3.shape
-		conv3 = Conv2D(256, 3, activation = 'relu', padding = 'valid', kernel_initializer = 'he_normal')(conv3)
-		print "conv3 shape:",conv3.shape
-		crop3 = Cropping2D(cropping=((16,17),(16,17)))(conv3)
-		print "crop3 shape:",crop3.shape
-		pool3 = MaxPooling2D(pool_size=(2, 2))(conv3)
-		print "pool3 shape:",pool3.shape
-
-		conv4 = Conv2D(512, 3, activation = 'relu', padding = 'valid', kernel_initializer = 'he_normal')(pool3)
-		conv4 = Conv2D(512, 3, activation = 'relu', padding = 'valid', kernel_initializer = 'he_normal')(conv4)
-		drop4 = Dropout(0.5)(conv4)
-		crop4 = Cropping2D(cropping=((4,4),(4,4)))(drop4)
-		pool4 = MaxPooling2D(pool_size=(2, 2))(drop4)
-
-		conv5 = Conv2D(1024, 3, activation = 'relu', padding = 'valid', kernel_initializer = 'he_normal')(pool4)
-		conv5 = Conv2D(1024, 3, activation = 'relu', padding = 'valid', kernel_initializer = 'he_normal')(conv5)
-		drop5 = Dropout(0.5)(conv5)
-
-		up6 = Conv2D(512, 2, activation = 'relu', padding = 'same', kernel_initializer = 'he_normal')(UpSampling2D(size = (2,2))(drop5))
-		merge6 = merge([crop4,up6], mode = 'concat', concat_axis = 3)
-		conv6 = Conv2D(512, 3, activation = 'relu', padding = 'valid', kernel_initializer = 'he_normal')(merge6)
-		conv6 = Conv2D(512, 3, activation = 'relu', padding = 'valid', kernel_initializer = 'he_normal')(conv6)
-
-		up7 = Conv2D(256, 2, activation = 'relu', padding = 'same', kernel_initializer = 'he_normal')(UpSampling2D(size = (2,2))(conv6))
-		merge7 = merge([crop3,up7], mode = 'concat', concat_axis = 3)
-		conv7 = Conv2D(256, 3, activation = 'relu', padding = 'valid', kernel_initializer = 'he_normal')(merge7)
-		conv7 = Conv2D(256, 3, activation = 'relu', padding = 'valid', kernel_initializer = 'he_normal')(conv7)
-
-		up8 = Conv2D(128, 2, activation = 'relu', padding = 'same', kernel_initializer = 'he_normal')(UpSampling2D(size = (2,2))(conv7))
-		merge8 = merge([crop2,up8], mode = 'concat', concat_axis = 3)
-		conv8 = Conv2D(128, 3, activation = 'relu', padding = 'valid', kernel_initializer = 'he_normal')(merge8)
-		conv8 = Conv2D(128, 3, activation = 'relu', padding = 'valid', kernel_initializer = 'he_normal')(conv8)
-
-		up9 = Conv2D(64, 2, activation = 'relu', padding = 'same', kernel_initializer = 'he_normal')(UpSampling2D(size = (2,2))(conv8))
-		merge9 = merge([crop1,up9], mode = 'concat', concat_axis = 3)
-		conv9 = Conv2D(64, 3, activation = 'relu', padding = 'valid', kernel_initializer = 'he_normal')(merge9)
-		conv9 = Conv2D(64, 3, activation = 'relu', padding = 'valid', kernel_initializer = 'he_normal')(conv9)
-		conv9 = Conv2D(2, 3, activation = 'relu', padding = 'valid', kernel_initializer = 'he_normal')(conv9)
-		'''
-
 		conv1 = Conv2D(32, 3, activation = 'relu', padding = 'same', kernel_initializer = 'he_normal')(inputs)
-		print "conv1 shape:",conv1.shape
+		#print "conv1 shape:",conv1.shape
 		conv1 = Conv2D(32, 3, activation = 'relu', padding = 'same', kernel_initializer = 'he_normal')(conv1)
-		print "conv1 shape:",conv1.shape
+		#print "conv1 shape:",conv1.shape
 		pool1 = MaxPooling2D(pool_size=(2, 2))(conv1)
-		print "pool1 shape:",pool1.shape
+		#print "pool1 shape:",pool1.shape
 
 		conv2 = Conv2D(64, 3, activation = 'relu', padding = 'same', kernel_initializer = 'he_normal')(pool1)
-		print "conv2 shape:",conv2.shape
+		#print "conv2 shape:",conv2.shape
 		conv2 = Conv2D(64, 3, activation = 'relu', padding = 'same', kernel_initializer = 'he_normal')(conv2)
-		print "conv2 shape:",conv2.shape
+		#print "conv2 shape:",conv2.shape
 		pool2 = MaxPooling2D(pool_size=(2, 2))(conv2)
-		print "pool2 shape:",pool2.shape
+		#print "pool2 shape:",pool2.shape
 
 		conv3 = Conv2D(128, 3, activation = 'relu', padding = 'same', kernel_initializer = 'he_normal')(pool2)
-		print "conv3 shape:",conv3.shape
+		#print "conv3 shape:",conv3.shape
 		conv3 = Conv2D(128, 3, activation = 'relu', padding = 'same', kernel_initializer = 'he_normal')(conv3)
-		print "conv3 shape:",conv3.shape
+		#print "conv3 shape:",conv3.shape
 		pool3 = MaxPooling2D(pool_size=(2, 2))(conv3)
-		print "pool3 shape:",pool3.shape
+		#print "pool3 shape:",pool3.shape
 
 		conv4 = Conv2D(256, 3, activation = 'relu', padding = 'same', kernel_initializer = 'he_normal')(pool3)
 		conv4 = Conv2D(256, 3, activation = 'relu', padding = 'same', kernel_initializer = 'he_normal')(conv4)
@@ -156,7 +94,7 @@ class myUnet(object):
     def train(self):
 
             #print("loading data")
-            imgs_train, imgs_mask_train, imgs_test = self.load_data()
+            #imgs_train, imgs_mask_train, imgs_test = self.load_data()
             #imgs_train = np.load("npydata/train.npy")
             #imgs_mask_train = np.load('npydata/train_labels.npy')
             #imgs_test = np.load("npydata/test.npy")
@@ -167,6 +105,12 @@ class myUnet(object):
             #imgs_mask_train = np.transpose(imgs_mask_train)
             #imgs_test = np.load('/Users/muthuvel/Documents/GitHub/Generative-Adversarial-Networks-for-Brain-Tumor-Segmentation/data/test_t1.npy')
             #imgs_test = np.transpose(imgs_test)
+            
+            train_flair = np.load('../data/train_flair.npy')
+            train_ot = np.load('../data/train_ot.npy')
+        
+            train = train_flair
+            label = train_ot
             
             imgs_train = np.reshape(train[0:15,:,:], (15,256,256,1))
             imgs_mask_train = np.reshape(label[0:15,:,:],(15,256,256,1))
