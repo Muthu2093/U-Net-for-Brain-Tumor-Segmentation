@@ -23,3 +23,9 @@ data/label.npy
 results/brats01epoch/mask/imgs.npy.mat
 *.tif
 *.mha
+code-python3/data 2.py
+code-python2/.ipynb_checkpoints/Untitled-checkpoint.ipynb
+code-python2/data.pyc
+code-python3/__pycache__/data.cpython-36.pyc
+code-python3/__pycache__/data.cpython-36.pyc
+code-python3/data copy.py
