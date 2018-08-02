@@ -6,10 +6,12 @@ from keras.layers import Input, merge, Conv2D, MaxPooling2D, UpSampling2D, Dropo
 from keras.optimizers import *
 from keras.callbacks import ModelCheckpoint, LearningRateScheduler
 from keras import backend as keras
-from data import *
+#from data import *
 from PIL import Image
 import scipy
 import cv2
+from matplotlib import pyplot as plt
+from scipy.stats.mstats import zscore
 
 class myUnet(object):
 
@@ -97,8 +99,11 @@ class myUnet(object):
     def train(self):
         
             print("loading data")
-            train = np.load('../data/training1.npy')
-            label = np.load('../data/label1.npy')
+            #train = np.load('../data/training3.npy')
+            #label = np.load('../data/label3.npy')
+            
+            train = np.load('../../../../media/training3.npy').reshape([4507, 256, 256, 4])
+            label = np.load('../../../../media/label3.npy').reshape([4507, 256, 256, 4])
             
             #train = np.load('../data/train_20images1channel.npy')
             #label = np.load('../data/label_20images1channel.npy')
@@ -106,27 +111,27 @@ class myUnet(object):
             n_input = train.shape[0]
             n_channel = train.shape[3]
             
-            imgs_train = train[0:int (n_input*0.8), :, :, :]
-            imgs_test = train[int (n_input*0.8):n_input, :, :, :]
-            imgs_mask_train = label[0:int (n_input*0.8), :, :, :]
-            imgs_test_label = label[int (n_input*0.8):n_input, :, :, :]
+            imgs_train = train[0:int (n_input*0.8), :, :,:] / 255
+            imgs_test = train[int (n_input*0.8):n_input, :, :,:] / 255
+            imgs_mask_train = label[0:int (n_input*0.8), :, :,:]  / 255
+            imgs_test_label = label[int (n_input*0.8):n_input, :, :,:]  / 255
             
             #print("merging channels")
             #imgs_train = formSingleChannel(imgs_train)
-            #imgs_test = formSingleChannel(imgs_test)
+            #imgs_test1 = formSingleChannel(imgs_test)
             
             print("loading data done")
-            #model = self.get_unet()
-            model = load_model("unet.hdf5")
+            model = self.get_unet()
+            #model = load_model("unet.hdf5")
             print("got unet")
             
-            model_checkpoint = ModelCheckpoint('unet.hdf5', monitor='loss',verbose=1, save_best_only=True)
+            model_checkpoint = ModelCheckpoint('../../../../media/unet.hdf5', monitor='loss',verbose=1, save_best_only=True)
             print('Fitting model...')
-            model.fit(imgs_train, imgs_mask_train, batch_size=50, nb_epoch=1, verbose=1,validation_split=0.15, shuffle=True, callbacks=[model_checkpoint])
+            model.fit(imgs_train, imgs_mask_train, batch_size=20, nb_epoch=10, verbose=1,validation_split=0.25, shuffle=True, callbacks=[model_checkpoint])
             
             print('predict test data')
             imgs_mask_test = model.predict(imgs_test, batch_size=1, verbose=1)
-            np.save('../results/imgs_mask_test.npy', imgs_mask_test)
+            np.save('../../../../media/imgs_mask_test.npy', imgs_mask_test)
 
     def save_img(self):
 
@@ -155,7 +160,7 @@ if __name__ == '__main__':
     #imgs_mask_train = np.load('npydata/train_labels.npy')
     #imgs_test = np.load("npydata/test.npy")
 	myunet.train()
-	myunet.save_img()
+	#myunet.save_img()
 
 
 

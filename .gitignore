@@ -21,3 +21,5 @@ data/dataset.npy
 data/label.npy
 *.npy
 results/brats01epoch/mask/imgs.npy.mat
+*.tif
+*.mha

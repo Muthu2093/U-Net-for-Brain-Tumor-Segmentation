@@ -14,12 +14,12 @@ img = a[:,:,0]/4 + a[:,:,1]/4 + a[:,:,2]/4 + a[:,:,3]/4
 img = a[:,:,0]/4 + a[:,:,1]/4 + a[:,:,2]/4 + a[:,:,3]/4
 
 imgs = np.load('../results/imgs_mask_test.npy')
-c = imgs[305,:,:,0]
+c = imgs[265,:,:,0]
 #c= sigmoid(c)
-[x,y] = np.where(c>0.3719138391315937)
-c[:,:] = 0
-c[x,y] = 1
-plt.imshow(c, "gray")
+[x,y,p,q] = np.where(c>0.4719138391315937)
+c[:,:,:,:] = 0
+c[x,y,p,q] = 1
+plt.imshow(c)
 
 plt.imshow(b*4,"gray")
 plt.imshow(img,"gray")
